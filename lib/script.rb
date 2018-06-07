@@ -7,11 +7,11 @@ class Script
       raise "プロセスが既に実行されています。"
     end
 
-    ruby   = "#{RbConfig::CONFIG["bindir"]}/ruby"
-    rails  = "#{Rails.root}/bin/rails"
-    script = "Script.run('#{path}', #{options.merge(process_id: proc.id).inspect})"
-    pid = spawn(ruby, rails, 'runner', '-e', Rails.env, script, out: '/dev/null')
-    Process.detach(pid) if pid
+    Util::Proc.fork(detach: true) do
+      options.merge!(process_id: proc.id)
+      $0 = %Q|bin/rails script runner -e #{Rails.env} "Script.run('#{path}', #{options.inspect})"|
+      Script.run(path, options)
+    end
     return true
   end
 
