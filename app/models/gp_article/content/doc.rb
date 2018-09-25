@@ -355,8 +355,20 @@ class GpArticle::Content::Doc < Cms::Content
     setting_value(:link_check) == 'enabled'
   end
 
+  def link_check_ignore_visible?
+    setting_extra_value(:link_check, :ignore) == 'visible'
+  end
+
   def accessibility_check_enabled?
     setting_value(:accessibility_check) == 'enabled'
+  end
+
+  def accessibility_check_ignore_visible?
+    setting_extra_value(:accessibility_check, :ignore) == 'visible'
+  end
+
+  def accessibility_check_modify_visible?
+    setting_extra_value(:accessibility_check, :modify) == 'visible'
   end
 
   def navigation_enabled?

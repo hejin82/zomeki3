@@ -303,6 +303,40 @@ $(function() {
 </table>
 <%- end -%>
 
+<%- if @item.name == 'link_check' -%>
+<table class="show">
+  <tr>
+    <th>無視機能</th>
+    <td>
+      <%- @item.extra_options[:ignore].each do |label, value| -%>
+        <%= radio_button_tag 'item[extra_values][ignore]', value, @item.extra_values[:ignore] == value %><%= label_tag "item_extra_values_ignore_#{value}", label %>
+      <%- end -%>
+    </td>
+  </tr>
+</table>
+<%- end -%>
+
+<%- if @item.name == 'accessibility_check' -%>
+<table class="show">
+  <tr>
+    <th>無視機能</th>
+    <td>
+      <%- @item.extra_options[:ignore].each do |label, value| -%>
+        <%= radio_button_tag 'item[extra_values][ignore]', value, @item.extra_values[:ignore] == value %><%= label_tag "item_extra_values_ignore_#{value}", label %>
+      <%- end -%>
+    </td>
+  </tr>
+  <tr>
+    <th>自動修正機能</th>
+    <td>
+      <%- @item.extra_options[:modify].each do |label, value| -%>
+        <%= radio_button_tag 'item[extra_values][modify]', value, @item.extra_values[:modify] == value %><%= label_tag "item_extra_values_modify_#{value}", label %>
+      <%- end -%>
+    </td>
+  </tr>
+</table>
+<%- end -%>
+
 <% if @item.name == 'navigation_setting'
      navigation_target_types = @item.extra_values[:types] || []
    -%>

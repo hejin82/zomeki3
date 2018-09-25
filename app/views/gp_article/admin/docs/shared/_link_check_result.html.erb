@@ -15,7 +15,7 @@
         </li>
         <%- end -%>
       </ul>
-      <%- unless results.all? {|r| r[:result] } -%>
+      <%- if @content.link_check_ignore_visible? && !results.all? {|r| r[:result] } -%>
       <div style="margin: 5px; text-align: right;">
         <%= f.check_box :in_ignore_link_check %><%= f.label :in_ignore_link_check, 'エラーを無視する' %>
       </div>

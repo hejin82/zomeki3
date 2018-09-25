@@ -70,12 +70,26 @@ class GpArticle::Content::Setting < Cms::ContentSetting
     name: 'リンクチェック',
     form_type: :radio_buttons,
     options: [['使用する', 'enabled'], ['使用しない', 'disabled']],
-    default_value: 'enabled'
+    default_value: 'enabled',
+    extra_options: {
+      ignore: [['表示する', 'visible'], ['表示しない', 'hidden']],
+    },
+    default_extra_values: {
+      ignore: 'visible'
+    }
   set_config :accessibility_check, menu: :form,
     name: 'アクセシビリティチェック',
     form_type: :radio_buttons,
     options: [['使用する', 'enabled'], ['使用しない', 'disabled']],
-    default_value: 'enabled'
+    default_value: 'enabled',
+    extra_options: {
+      ignore: [['表示する', 'visible'], ['表示しない', 'hidden']],
+      modify: [['表示する', 'visible'], ['表示しない', 'hidden']],
+    },
+    default_extra_values: {
+      ignore: 'visible',
+      modify: 'visible'
+    }
 
   # menu: :index
   set_config :pagination_label, menu: :index,
@@ -319,6 +333,11 @@ class GpArticle::Content::Setting < Cms::ContentSetting
       ex[:doc_publish_more_pages] = params[:doc_publish_more_pages]
     when 'pagination_label'
       ex[:next_label] = params[:next_label]
+    when 'link_check'
+      ex[:ignore] = params[:ignore]
+    when 'accessibility_check'
+      ex[:ignore] = params[:ignore]
+      ex[:modify] = params[:modify]
     when 'navigation_setting'
       ex[:types] = params[:types]
     end

@@ -14,8 +14,12 @@
         <%- end -%>
       </ul>
       <div style="margin: 5px; text-align: right;">
-        <%= f.check_box :in_ignore_accessibility_check %><%= f.label :in_ignore_accessibility_check, '無視' %>　
-        <%= f.check_box :in_modify_accessibility_check %><%= f.label :in_modify_accessibility_check, '自動修正' %>
+        <%- if @content.accessibility_check_ignore_visible? -%>
+          <%= f.check_box :in_ignore_accessibility_check %><%= f.label :in_ignore_accessibility_check, '無視' %>
+        <%- end -%>
+        <%- if @content.accessibility_check_modify_visible? -%>
+          <%= f.check_box :in_modify_accessibility_check %><%= f.label :in_modify_accessibility_check, '自動修正' %>
+        <%- end -%>
       </div>
     <%- end -%>
   </div>
